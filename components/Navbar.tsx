@@ -44,7 +44,7 @@ export default function Navbar() {
               >
                 {link.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-px bg-teal transition-all duration-300 ${
+                  className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300 ${
                     active ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
@@ -53,7 +53,7 @@ export default function Navbar() {
           })}
           <Link
             href="/contact"
-            className="rounded-sm bg-ink px-5 py-2.5 text-sm text-cream transition-colors hover:bg-ink-deep"
+            className="rounded-sm bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-deep"
           >
             Get in touch
           </Link>
@@ -86,7 +86,7 @@ export default function Navbar() {
             <li>
               <Link
                 href="/contact"
-                className="mt-2 block rounded-sm bg-ink px-5 py-3 text-center text-sm text-cream"
+                className="mt-2 block rounded-sm bg-accent px-5 py-3 text-center text-sm font-semibold text-white"
                 onClick={() => setOpen(false)}
               >
                 Get in touch

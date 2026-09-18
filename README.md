@@ -8,7 +8,7 @@ assistance, logistics, and HR consultancy.
 - Next.js (App Router, TypeScript)
 - Tailwind CSS v4
 - lucide-react icons
-- Fraunces (display serif) + Inter (body), via `next/font`
+- Source Serif 4 (headings) + Source Sans 3 (body), via `next/font`
 
 ## Running locally
 
@@ -38,7 +38,8 @@ public/images/  Site photography and logo
 
 ## Notes
 
-- Testimonials and client names in `lib/content.ts` are placeholders — swap
-  in real quotes and logos before launch.
-- Contact form in `components/ContactForm.tsx` is UI-only (no backend wired
-  up yet).
+- All copy, client names, and contact details in `lib/content.ts` come from
+  mes.mv. Stats are counts derived from that data, not marketing figures.
+- The contact form opens a prefilled email to info@mes.mv (no backend).
+- `service-sourcing.jpg`, `service-hr.jpg`, and `approach-bg.jpg` are stock
+  photos from Unsplash; the rest are MES photography.

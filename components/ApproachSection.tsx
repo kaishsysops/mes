@@ -15,14 +15,14 @@ export default function ApproachSection() {
       />
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <p className="text-xs font-semibold tracking-wide uppercase text-teal">Our approach</p>
+          <p className="text-xs font-semibold tracking-wide uppercase text-accent">Our approach</p>
           <h2 className="mt-4 font-serif text-4xl font-semibold leading-[1.05] text-cream sm:text-5xl lg:text-6xl">
-            We&rsquo;re a solutions provider.
+            One team from brief to arrival.
           </h2>
           <p className="mt-6 max-w-md text-base leading-relaxed text-cream/70">
-            Every placement starts with a call to your site lead, not just a job
-            description. We want to know who&rsquo;s already on the floor before
-            we tell you who should join it.
+            Hiring from overseas means recruiters, visa agents, document
+            handlers, and travel coordinators. MES does all of it, so you deal
+            with one company instead of four.
           </p>
         </Reveal>
         <Reveal>

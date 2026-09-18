@@ -1,4 +1,23 @@
-import { Users, FileText, Truck, Briefcase, type LucideIcon } from "lucide-react";
+import {
+  Users,
+  Truck,
+  FileText,
+  Briefcase,
+  CalendarClock,
+  Building2,
+  Layers,
+  ClipboardList,
+  Route,
+  BadgeCheck,
+  type LucideIcon,
+} from "lucide-react";
+
+export const contact = {
+  phones: ["(+960) 400 8080", "(+960) 331 0404"],
+  hotlines: ["(+960) 777 8525", "(+960) 777 7775"],
+  emails: ["info@mes.mv", "marketing@mes.mv", "sales@mes.mv"],
+  address: ["Niyandhurumaage, 9th floor", "Alimas Magu, Male, 20260"],
+};
 
 export type Service = {
   slug: string;
@@ -7,125 +26,120 @@ export type Service = {
   summary: string;
   detail: string;
   image: string;
+  imageAlt: string;
 };
 
 export const services: Service[] = [
   {
-    slug: "talent-sourcing",
+    slug: "recruitment",
     icon: Users,
-    title: "Talent Sourcing",
-    summary: "We identify and vet skilled candidates matched to your exact requirements.",
+    title: "Recruitment & Manpower",
+    summary: "Skilled, semi-skilled, and professional recruitment for the roles you need filled.",
     detail:
-      "Our sourcing team works directly with employers to understand role requirements, then draws on an established network of pre-screened candidates across construction, logistics, hospitality, and skilled trades. Every candidate is interviewed and reference-checked before we put a name in front of you.",
+      "We recruit and supply skilled, semi-skilled, and professional workers for employers in the Maldives, and help local Maldivians find suitable jobs. You tell us the role; we coordinate candidates through to selection.",
     image: "/images/service-sourcing.jpg",
+    imageAlt: "Employer and candidate shaking hands after an interview",
   },
   {
-    slug: "visa-documentation",
-    icon: FileText,
-    title: "Visa & Documentation",
-    summary: "End-to-end support for work permits, visas, and compliance paperwork.",
-    detail:
-      "We manage the documentation process from application to approval, keeping employers and candidates informed at every stage. That means fewer delays, fewer rejected applications, and less administrative load on your HR team.",
-    image: "/images/elite-process.jpg",
-  },
-  {
-    slug: "logistics-relocation",
+    slug: "logistics",
     icon: Truck,
-    title: "Logistics & Relocation",
-    summary: "Travel, housing, and onboarding logistics handled from offer to arrival.",
+    title: "Logistical Services",
+    summary: "Getting your new hires from the hiring decision to arrival on site.",
     detail:
-      "From flights to housing arrangements, we coordinate the practical details of relocation so new hires arrive ready to work. Our team stays in contact through the first weeks on the ground to resolve anything that comes up.",
+      "Once a hire is confirmed, we coordinate travel and arrival so the worker reaches the job ready to start. One team handles it, so you are not chasing separate agents.",
     image: "/images/elite-arrival.jpg",
+    imageAlt: "MES officer welcoming arriving workers at an airport concourse",
+  },
+  {
+    slug: "documents",
+    icon: FileText,
+    title: "Document & Passport Handling",
+    summary: "Work permits, visas, passports, and statutory paperwork in one place.",
+    detail:
+      "We handle statutory and legal documentation, visas, work permits, passports, and qualification and testing support. It sits with the same team that runs the recruitment, so nothing falls between two offices.",
+    image: "/images/elite-process.jpg",
+    imageAlt: "MES specialist reviewing a passport and employment documents",
   },
   {
     slug: "hr-consultancy",
     icon: Briefcase,
     title: "HR Consultancy",
-    summary: "Workforce planning and HR guidance for growing teams.",
+    summary: "Practical HR guidance for employers planning their workforce.",
     detail:
-      "We advise on workforce structure, retention, and compliance, drawing on patterns from 3,200+ placements across construction, hospitality, and healthcare. Engagements range from a single planning session to an ongoing retainer.",
+      "Guidance for employers making workforce decisions, drawing on the same team that runs recruitment, documentation, and logistics day to day.",
     image: "/images/service-hr.jpg",
+    imageAlt: "Two people reviewing staffing documents at a desk",
   },
 ];
 
-export const stats = [
-  { value: "15+", label: "Years of experience" },
-  { value: "3,200+", label: "Placements made" },
-  { value: "180+", label: "Clients served" },
-  { value: "22", label: "Countries covered" },
+export const sectors = [
+  "Hospitality",
+  "Health",
+  "Retail",
+  "Real estate",
+  "Construction",
+  "Engineering",
+  "Infrastructure",
 ];
 
 export const clientNames = [
-  "Apex Group",
-  "Northbridge",
-  "Cascade Logistics",
-  "Harbor & Co",
-  "Velum Industries",
-  "Stonefield Resorts",
-  "Coral Bay Hospitality",
-  "Redline Construction",
-  "Atoll Beverages",
-  "Meridian Airways",
-  "Bluewater Marine",
-  "Summit Contracting",
+  "Coco Palm Bodu Hithi",
+  "Tree Top Hospital",
+  "SIMDI",
+  "Asters",
+  "SJ Construction",
+  "DAMAS Real Estate",
+  "HAZA",
+  "KAIMOO Group",
+  "iNOCA",
+  "Happy Market",
+  "ROtime Engineering and Technology",
+  "Island Expert",
+  "Reefside",
+  "MEGA Maldives",
+  "Varindera Construction",
+  "Renaatus",
+  "SMC Infrastructures",
+  "Mohan Mutha Infrastructures",
+  "Hunan No. 6 Engineering",
+  "Beijing Urban Construction",
+  "Dongfang Electric International Corporation",
+  "China Machinery Engineering Corporation",
+  "China State Construction Engineering",
+  "Sinohydro Corporation",
+];
+
+export const stats: { value: string; label: string; icon: LucideIcon }[] = [
+  { value: "20+", label: "Years of experience", icon: CalendarClock },
+  { value: `${clientNames.length}`, label: "Named clients", icon: Building2 },
+  { value: `${sectors.length}`, label: "Sectors served", icon: Layers },
+  { value: `${services.length}`, label: "Service lines", icon: Briefcase },
 ];
 
 export const checklistItems = [
-  "A dedicated account manager for every client",
-  "Candidates vetted and reference-checked before introduction",
-  "Documentation handled in-house, not outsourced",
-  "Transparent pricing with no hidden placement fees",
+  "Over 20 years of experience with businesses of all sizes",
+  "Recruitment managed end to end, from brief to arrival",
+  "Visa, work-permit, and passport handling in-house",
+  "One team and one point of contact for the whole process",
 ];
 
-export const processSteps = [
+export const processSteps: { step: string; title: string; description: string; icon: LucideIcon }[] = [
   {
     step: "01",
-    title: "Brief",
-    description: "We sit down with your team to understand the role, the timeline, and the budget.",
+    icon: ClipboardList,
+    title: "Understand the requirement",
+    description: "The role, the number of people, the skill level, and when you need them.",
   },
   {
     step: "02",
-    title: "Source & Vet",
-    description: "We shortlist candidates from our network and run interviews and reference checks.",
+    icon: Route,
+    title: "Coordinate the route",
+    description: "Candidate selection, visas, work permits, and travel, run by one team.",
   },
   {
     step: "03",
-    title: "Document",
-    description: "Work permits, visas, and compliance paperwork move through our in-house process.",
-  },
-  {
-    step: "04",
-    title: "Arrive & Onboard",
-    description: "We coordinate travel and housing, and stay in touch through the first weeks on the job.",
-  },
-];
-
-export const sourceCountries = [
-  "Sri Lanka",
-  "India",
-  "Bangladesh",
-  "Nepal",
-  "Philippines",
-  "Indonesia",
-];
-
-export const testimonials = [
-  {
-    quote:
-      "MES filled twelve housekeeping roles for our peak season in eleven days. That turnaround is why we keep coming back.",
-    name: "Operations Director",
-    company: "Cascade Logistics",
-  },
-  {
-    quote:
-      "The documentation process used to be our biggest bottleneck. Since MES took it over, it isn't a conversation we have to have anymore.",
-    name: "HR Manager",
-    company: "Harbor & Co",
-  },
-  {
-    quote:
-      "Every housekeeping and maintenance hire we've made since 2019 has come through MES. We stopped posting jobs ourselves.",
-    name: "General Manager",
-    company: "Stonefield Resorts",
+    icon: BadgeCheck,
+    title: "Support readiness",
+    description: "Arrival and on-the-ground coordination until the worker starts.",
   },
 ];

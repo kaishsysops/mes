@@ -1,60 +1,53 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, PhoneCall, Mail, MapPin } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import IconBadge from "@/components/IconBadge";
 import ContactForm from "@/components/ContactForm";
+import { contact } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact | MES",
-  description: "Get in touch with the MES team.",
+  description: "Contact the MES team in Male.",
 };
 
 const details = [
-  { icon: Phone, label: "+1 (000) 000-0000" },
-  { icon: Mail, label: "hello@mes.example" },
-  { icon: MapPin, label: "100 Harbor Ave, Suite 400" },
-  { icon: Clock, label: "Mon–Fri, 9am–6pm" },
+  { icon: Phone, label: "Telephone", lines: contact.phones },
+  { icon: PhoneCall, label: "Hotline", lines: contact.hotlines },
+  { icon: Mail, label: "Email", lines: contact.emails },
+  { icon: MapPin, label: "Office", lines: contact.address },
 ];
 
 export default function ContactPage() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
       <Reveal className="max-w-2xl">
-        <p className="text-xs tracking-[0.2em] uppercase text-teal">Contact</p>
-        <h1 className="mt-4 font-serif font-semibold text-4xl leading-tight text-ink sm:text-5xl">
-          Let&rsquo;s talk about your team.
+        <p className="text-xs font-semibold tracking-wide uppercase text-accent-deep">Contact</p>
+        <h1 className="mt-4 font-serif text-4xl font-semibold leading-tight text-ink sm:text-5xl">
+          Start with the requirement in front of you.
         </h1>
-        <p className="mt-6 text-base leading-relaxed text-ink/70">
-          Tell us what you&rsquo;re hiring for and we&rsquo;ll get back to you within
-          one business day.
+        <p className="mt-6 text-lg leading-relaxed text-ink/70">
+          Recruiting, moving a workforce, sorting documents, or looking for HR
+          advice. Send the details and the team will pick it up.
         </p>
       </Reveal>
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <Reveal>
+      <div className="mt-12 grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
+        <Reveal className="rounded-md border border-line bg-white/60 p-8">
           <ContactForm />
         </Reveal>
 
-        <Reveal className="space-y-8">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm">
-            <Image
-              src="/images/office-contact.jpg"
-              alt="MES office"
-              fill
-              className="object-cover"
-              sizes="(min-width: 1024px) 40vw, 90vw"
-            />
-            <div className="absolute inset-0 bg-ink-deep/10 mix-blend-multiply" />
-          </div>
-
-          <ul className="space-y-4 border-t border-line pt-6">
-            {details.map((detail) => (
-              <li key={detail.label} className="flex items-center gap-3 text-sm text-ink/70">
-                <detail.icon size={16} className="text-teal" />
-                <span>{detail.label}</span>
-              </li>
-            ))}
-          </ul>
+        <Reveal stagger={0.08} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+          {details.map((detail) => (
+            <div key={detail.label} className="flex h-full gap-4 rounded-md border border-line p-5">
+              <IconBadge icon={detail.icon} size="sm" />
+              <div>
+                <p className="text-xs font-semibold tracking-wide uppercase text-ink/50">{detail.label}</p>
+                {detail.lines.map((line) => (
+                  <p key={line} className="mt-1 text-sm text-ink/85">{line}</p>
+                ))}
+              </div>
+            </div>
+          ))}
         </Reveal>
       </div>
     </section>

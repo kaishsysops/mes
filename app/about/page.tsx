@@ -1,101 +1,103 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Eye, HeartHandshake, Target } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import IconBadge from "@/components/IconBadge";
 import StatsRow from "@/components/StatsRow";
 import CtaBanner from "@/components/CtaBanner";
 
 export const metadata: Metadata = {
   title: "About | MES",
-  description: "Our story, our approach, and the team behind MES.",
+  description: "Maldives-based recruiting agent and manpower supplier.",
 };
+
+const principles = [
+  {
+    icon: Eye,
+    title: "Vision",
+    text: "To be a well-regarded company among the leading organisations in the Maldives.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Values",
+    text: "Responsible corporate conduct, respect for people, and a meaningful contribution to employment creation.",
+  },
+  {
+    icon: Target,
+    title: "Mission",
+    text: "To be a reliable total-solutions provider that brings practical value to clients and workforce requirements.",
+  },
+];
 
 export default function AboutPage() {
   return (
     <>
       <section className="border-b border-line">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
-          <Reveal className="max-w-2xl">
-            <p className="text-xs tracking-[0.2em] uppercase text-teal">About us</p>
-            <h1 className="mt-4 font-serif font-semibold text-4xl leading-tight text-ink sm:text-5xl">
-              Built by people who&rsquo;ve done the hiring themselves.
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
+          <Reveal>
+            <p className="text-xs font-semibold tracking-wide uppercase text-accent-deep">About MES</p>
+            <h1 className="mt-4 font-serif text-4xl font-semibold leading-tight text-ink sm:text-5xl">
+              A Maldives-based recruiting agent and manpower supplier.
             </h1>
-            <p className="mt-6 text-base leading-relaxed text-ink/70">
-              MES started as a small team helping local employers fill hard-to-staff
-              roles. Fifteen years on, we work across borders, but the job hasn&rsquo;t
-              changed: understand what a business needs, find the right person, and
-              handle everything in between.
+            <p className="mt-6 text-lg leading-relaxed text-ink/70">
+              MES supports employers with skilled, semi-skilled, and professional
+              workforce requirements, and was set up to help the Maldivian
+              community find suitable work.
             </p>
           </Reveal>
-
-          <Reveal className="relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-sm">
+          <Reveal className="relative aspect-[4/3] w-full overflow-hidden rounded-md">
             <Image
               src="/images/elite-hero-ready.jpg"
-              alt="MES coordinator supporting a workforce arrival process"
+              alt="MES coordinator supporting a workforce arrival"
               fill
               className="object-cover"
-              sizes="100vw"
+              sizes="(min-width: 1024px) 50vw, 100vw"
             />
-            <div className="absolute inset-0 bg-ink-deep/10 mix-blend-multiply" />
           </Reveal>
         </div>
       </section>
 
-      <section className="border-b border-line bg-ink-deep">
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="text-xs tracking-[0.2em] uppercase text-teal">Mission</p>
-            <p className="mt-4 font-serif text-2xl leading-snug text-cream sm:text-3xl">
-              Fifteen years, one job: match the right person to the right
-              role, and handle the paperwork so nobody else has to.
+      <section className="border-b border-line bg-accent-soft/40">
+        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+          <Reveal>
+            <p className="text-xs font-semibold tracking-wide uppercase text-accent-deep">Company background</p>
+            <h2 className="mt-4 font-serif text-3xl font-semibold text-ink sm:text-4xl">
+              Two agencies, one entity
+            </h2>
+          </Reveal>
+          <Reveal className="space-y-5 text-base leading-relaxed text-ink/75">
+            <p>
+              MESPL is registered in the Maldives as a limited liability company
+              providing skilled, semi-skilled, and professional recruitment and
+              manpower support.
+            </p>
+            <p>
+              Waveline Maldives, an established human-resources and manpower
+              recruitment agency, was amalgamated with MESPL. The combined company
+              handles recruitment, statutory and legal documentation, visas, work
+              permits, passports, and qualification and testing support through a
+              single entity.
             </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="border-b border-line bg-cream">
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="font-serif text-2xl italic leading-relaxed text-ink sm:text-3xl">
-              &ldquo;The paperwork used to take longer than the placement.
-              We built MES to fix that first.&rdquo;
-            </p>
-            <p className="mt-4 text-sm tracking-[0.1em] uppercase text-ink/50">
-              Founder, MES
-            </p>
+      <section className="border-b border-line">
+        <div className="mx-auto max-w-7xl px-6 py-20">
+          <Reveal stagger={0.1} className="grid gap-5 md:grid-cols-3">
+            {principles.map((item) => (
+              <div key={item.title} className="h-full rounded-md border border-line bg-white/60 p-7">
+                <IconBadge icon={item.icon} />
+                <p className="mt-5 font-serif text-xl font-semibold text-ink">{item.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ink/65">{item.text}</p>
+              </div>
+            ))}
           </Reveal>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16">
         <StatsRow />
-      </section>
-
-      <section className="border-t border-line bg-cream">
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <Reveal>
-            <p className="text-xs tracking-[0.2em] uppercase text-teal">Life at MES</p>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-ink sm:text-4xl">
-              On site, on the phone, on it.
-            </h2>
-          </Reveal>
-          <Reveal stagger={0.1} className="mt-10 grid gap-4 sm:grid-cols-3">
-            {[
-              { src: "/images/culture-1.jpg", alt: "MES team reviewing a placement plan" },
-              { src: "/images/culture-2.jpg", alt: "MES team coordinating on-site" },
-              { src: "/images/culture-3.jpg", alt: "MES specialist meeting a candidate" },
-            ].map((photo) => (
-              <div key={photo.src} className="relative aspect-[4/5] w-full overflow-hidden rounded-sm">
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 hover:scale-105"
-                  sizes="(min-width: 640px) 33vw, 100vw"
-                />
-              </div>
-            ))}
-          </Reveal>
-        </div>
       </section>
 
       <CtaBanner />

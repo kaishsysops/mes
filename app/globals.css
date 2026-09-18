@@ -4,11 +4,12 @@
   --color-ink: #1b2a4a;
   --color-ink-deep: #16233e;
   --color-cream: #faf8f4;
-  --color-teal: #6ba39a;
-  --color-teal-deep: #5e9e96;
+  --color-accent: #e8702a;
+  --color-accent-deep: #c4561a;
+  --color-accent-soft: #fcebdf;
   --color-line: #ded8ca;
-  --font-serif: var(--font-fraunces);
-  --font-sans: var(--font-inter);
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
 html {
@@ -22,7 +23,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-teal);
+  background: var(--color-accent);
   color: var(--color-cream);
 }
 
@@ -54,60 +55,9 @@ body {
   animation: fade-in 1s ease-out both;
 }
 
-@keyframes fade-scale {
-  from {
-    opacity: 0;
-    transform: scale(1.08);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fade-scale {
-  animation: fade-scale 1.1s ease-out both;
-}
-
-@keyframes ken-burns {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.08);
-  }
-}
-
-.animate-ken-burns {
-  animation: ken-burns 16s ease-out infinite alternate;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-.animate-float-delayed {
-  animation: float 4s ease-in-out infinite;
-  animation-delay: 1.5s;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
-  .animate-fade-in,
-  .animate-fade-scale,
-  .animate-ken-burns,
-  .animate-float,
-  .animate-float-delayed {
+  .animate-fade-in {
     animation: none;
   }
 }
