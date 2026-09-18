@@ -1,0 +1,12 @@
+services:
+  web:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm run dev -- -H 0.0.0.0"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
