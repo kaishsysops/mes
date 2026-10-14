@@ -2,17 +2,18 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import { checklistItems } from "@/lib/content";
+import { frame } from "@/lib/ui";
 
 export default function ApproachSection() {
   return (
-    <section className="px-2 sm:px-3">
+    <section className={frame}>
       <div className="grid overflow-hidden rounded-2xl bg-navy text-on-navy lg:grid-cols-2">
         <div className="relative min-h-[320px] sm:min-h-[420px] lg:min-h-[680px]">
           <Image
             src="/images/elite-process.jpg"
             alt="MES specialist preparing a passport and arrival plan for a new hire"
             fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(min-width: 1600px) 800px, (min-width: 1024px) 50vw, 100vw"
             className="object-cover"
           />
         </div>

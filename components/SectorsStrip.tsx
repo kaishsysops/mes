@@ -1,9 +1,10 @@
 import Reveal from "@/components/Reveal";
 import { sectors } from "@/lib/content";
+import { frame } from "@/lib/ui";
 
 export default function SectorsStrip() {
   return (
-    <section className="px-2 sm:px-3">
+    <section className={frame}>
       <div className="rounded-2xl bg-navy px-6 py-20 text-on-navy sm:px-12 lg:px-16 lg:py-28">
         <Reveal>
           <h2 className="text-sm font-medium text-on-navy/60">Sectors we recruit for</h2>

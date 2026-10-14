@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import PageHeader from "@/components/PageHeader";
 import Stats from "@/components/Stats";
 import CtaBanner from "@/components/CtaBanner";
+import { frame, frameSizes } from "@/lib/ui";
 
 export const metadata: Metadata = {
   title: "About | MES",
@@ -33,14 +34,14 @@ export default function AboutPage() {
         lead="MES supports employers with skilled, semi-skilled, and professional workforce requirements, and was set up to help the Maldivian community find suitable work."
       />
 
-      <div className="px-2 sm:px-3">
+      <div className={frame}>
         <Reveal className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-navy sm:aspect-[21/9]">
           <Image
             src="/images/elite-arrival.jpg"
             alt="MES coordinator briefing newly arrived workers at the ferry terminal"
             fill
             className="object-cover"
-            sizes="100vw"
+            sizes={frameSizes}
           />
         </Reveal>
       </div>
@@ -63,7 +64,7 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
-      <section className="px-2 sm:px-3">
+      <section className={frame}>
         <div className="grid gap-px overflow-hidden rounded-2xl bg-line md:grid-cols-3">
           {principles.map((item, i) => (
             <div key={item.title} className="bg-surface">

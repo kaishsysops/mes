@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { contact, services } from "@/lib/content";
-import { logoDarkFilter } from "@/lib/ui";
+import { frame, logoDarkFilter } from "@/lib/ui";
 
 const linkClass = "text-muted transition-colors hover:text-ink";
 
 export default function Footer() {
   return (
-    <footer className="px-2 pb-2 sm:px-3 sm:pb-3">
+    <footer className={`${frame} pb-2 sm:pb-3`}>
       <div className="rounded-2xl bg-surface">
         <div className="mx-auto grid max-w-[1400px] gap-12 px-6 py-16 sm:grid-cols-2 lg:grid-cols-12 lg:px-10 lg:py-20">
           <div className="lg:col-span-5">
