@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import IconBadge from "@/components/IconBadge";
+import PageHeader from "@/components/PageHeader";
 import CtaBanner from "@/components/CtaBanner";
 import { services } from "@/lib/content";
 
@@ -13,46 +13,56 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <section className="border-b border-line">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
-          <Reveal className="max-w-2xl">
-            <p className="text-xs font-semibold tracking-wide uppercase text-accent-deep">Services</p>
-            <h1 className="mt-4 font-serif text-4xl font-semibold leading-tight text-ink sm:text-5xl">
-              Everything between a vacancy and a first day.
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-ink/70">
-              Use one service or all four. Either way, the same team is
-              responsible from the brief to arrival.
-            </p>
-          </Reveal>
+      <PageHeader
+        title="Everything between a vacancy and a first day."
+        lead="Use one service or all four. Either way, the same team is responsible from the brief to arrival."
+      />
+
+      <div className="mx-auto grid max-w-[1400px] gap-12 px-4 pb-8 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-10">
+        {/* Sticky index on desktop; hidden on mobile where the stacked sections are enough */}
+        <nav aria-label="Services" className="hidden lg:col-span-3 lg:block">
+          <ul className="sticky top-28 space-y-1 border-l border-line">
+            {services.map((service) => (
+              <li key={service.slug}>
+                <a
+                  href={`#${service.slug}`}
+                  className="-ml-px block border-l border-transparent py-2 pl-5 text-sm text-muted transition-colors hover:border-accent hover:text-ink"
+                >
+                  {service.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="space-y-24 lg:col-span-9 lg:space-y-32">
+          {services.map((service) => {
+            const Icon = service.icon;
+            return (
+              <section key={service.slug} id={service.slug} className="scroll-mt-24">
+                <Reveal className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-navy">
+                  <Image
+                    src={service.image}
+                    alt={service.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 70vw, 100vw"
+                  />
+                </Reveal>
+                <Reveal className="mt-10 grid gap-6 md:grid-cols-[auto_1fr] md:gap-10">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full border border-line text-accent-ink">
+                    <Icon size={20} strokeWidth={1.5} />
+                  </span>
+                  <div>
+                    <h2 className="text-3xl font-semibold tracking-[-0.03em] text-ink sm:text-4xl">{service.title}</h2>
+                    <p className="mt-5 max-w-[60ch] text-lg leading-relaxed text-muted">{service.detail}</p>
+                  </div>
+                </Reveal>
+              </section>
+            );
+          })}
         </div>
-      </section>
-
-      {services.map((service, index) => (
-        <section key={service.slug} id={service.slug} className="scroll-mt-24 border-b border-line">
-          <div
-            className={`mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-2 lg:gap-16 ${
-              index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-            }`}
-          >
-            <Reveal className="relative aspect-[4/3] w-full overflow-hidden rounded-md">
-              <Image
-                src={service.image}
-                alt={service.imageAlt}
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 45vw, 90vw"
-              />
-            </Reveal>
-
-            <Reveal>
-              <IconBadge icon={service.icon} />
-              <h2 className="mt-5 font-serif text-3xl font-semibold text-ink">{service.title}</h2>
-              <p className="mt-4 text-lg leading-relaxed text-ink/70">{service.detail}</p>
-            </Reveal>
-          </div>
-        </section>
-      ))}
+      </div>
 
       <CtaBanner />
     </>

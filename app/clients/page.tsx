@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Building2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import PageHeader from "@/components/PageHeader";
 import SectorsStrip from "@/components/SectorsStrip";
 import CtaBanner from "@/components/CtaBanner";
 import { clientNames } from "@/lib/content";
@@ -13,35 +13,24 @@ export const metadata: Metadata = {
 export default function ClientsPage() {
   return (
     <>
-      <section className="border-b border-line">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
-          <Reveal className="max-w-2xl">
-            <p className="text-xs font-semibold tracking-wide uppercase text-accent-deep">Clients</p>
-            <h1 className="mt-4 font-serif text-4xl font-semibold leading-tight text-ink sm:text-5xl">
-              Organisations that have worked with MES.
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-ink/70">
-              Employers in hospitality, health, retail, real estate,
-              construction, engineering, and infrastructure.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHeader
+        title="Organisations that have worked with MES."
+        lead="Employers in hospitality, health, retail, real estate, construction, engineering, and infrastructure."
+      />
 
-      <section className="border-b border-line">
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <Reveal stagger={0.03} className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="mx-auto max-w-[1400px] px-4 pb-24 sm:px-6 lg:px-10 lg:pb-32">
+        <Reveal>
+          <ul className="grid border-t border-line pt-6 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-3">
             {clientNames.map((name) => (
-              <div
+              <li
                 key={name}
-                className="flex h-full items-center gap-3 rounded-md border border-line bg-white/60 p-5 transition-colors hover:border-accent/50"
+                className="py-3 text-xl font-medium tracking-[-0.015em] text-ink transition-colors duration-300 hover:text-accent-ink"
               >
-                <Building2 size={20} strokeWidth={1.75} className="shrink-0 text-accent" />
-                <span className="font-medium text-ink/85">{name}</span>
-              </div>
+                {name}
+              </li>
             ))}
-          </Reveal>
-        </div>
+          </ul>
+        </Reveal>
       </section>
 
       <SectorsStrip />

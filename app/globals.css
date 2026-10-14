@@ -1,15 +1,87 @@
 @import "tailwindcss";
 
+/* `dark:` follows the same rule as the tokens: explicit choice first, system second */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
+
+/*
+  Design tokens. Colours follow prefers-color-scheme until the visitor picks a
+  theme with the nav toggle, which sets data-theme on <html> (see app/layout.tsx).
+  Components only use the semantic names below.
+
+  Shape rule: buttons and other controls are full pills, form fields are
+  rounded-xl, every surface (image, panel, card) is rounded-2xl.
+*/
+:root {
+  --paper: #f4f6f8;
+  --surface: #ffffff;
+  --ink: #0c1a2e;
+  --muted: #4a5668;
+  --line: #d9dfe6;
+  --accent: #1d5fb4;
+  --on-accent: #ffffff;
+  --accent-ink: #1a56a3;
+  --navy: #0b1d36;
+  --on-navy: #eef2f7;
+  --danger: #b42318;
+  color-scheme: light;
+}
+
+/* Dark tokens: follow the system unless the visitor picked light, or apply when they picked dark */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #080f1b;
+    --surface: #0f1a2b;
+    --ink: #e8edf4;
+    --muted: #9aa7b8;
+    --line: #1f2c40;
+    --accent: #7ab0ee;
+    --on-accent: #08111f;
+    --accent-ink: #8dbcf2;
+    --navy: #0f1d33;
+    --on-navy: #eef2f7;
+    --danger: #f97066;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #080f1b;
+  --surface: #0f1a2b;
+  --ink: #e8edf4;
+  --muted: #9aa7b8;
+  --line: #1f2c40;
+  --accent: #7ab0ee;
+  --on-accent: #08111f;
+  --accent-ink: #8dbcf2;
+  --navy: #0f1d33;
+  --on-navy: #eef2f7;
+  --danger: #f97066;
+}
+
 @theme inline {
-  --color-ink: #1b2a4a;
-  --color-ink-deep: #16233e;
-  --color-cream: #faf8f4;
-  --color-accent: #e8702a;
-  --color-accent-deep: #c4561a;
-  --color-accent-soft: #fcebdf;
-  --color-line: #ded8ca;
-  --font-serif: var(--font-display);
-  --font-sans: var(--font-body);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-navy: var(--navy);
+  --color-on-navy: var(--on-navy);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-geist);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
@@ -17,47 +89,71 @@ html {
 }
 
 body {
-  background-color: var(--color-cream);
-  color: var(--color-ink);
+  background-color: var(--paper);
+  color: var(--ink);
   font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-cream);
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
-@keyframes fade-up {
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Page-load entrance for above-the-fold content */
+@keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateY(24px);
   }
 }
 
-@keyframes fade-in {
+@keyframes settle {
   from {
     opacity: 0;
+    transform: scale(1.06);
   }
+}
+
+@keyframes marquee {
   to {
-    opacity: 1;
+    transform: translateX(-50%);
   }
 }
 
-.animate-fade-up {
-  animation: fade-up 0.7s ease-out both;
-}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-rise {
+    animation: rise 0.9s var(--ease-out-expo) both;
+    animation-delay: var(--delay, 0s);
+  }
 
-.animate-fade-in {
-  animation: fade-in 1s ease-out both;
-}
+  .animate-settle {
+    animation: settle 1.6s var(--ease-out-expo) both;
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-up,
-  .animate-fade-in {
-    animation: none;
+  .animate-marquee {
+    animation: marquee 60s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  /* Scroll reveal, driven by components/Reveal.tsx */
+  [data-reveal] {
+    transition:
+      opacity 0.8s var(--ease-out-expo),
+      transform 0.8s var(--ease-out-expo);
+    transition-delay: var(--delay, 0s);
+  }
+
+  [data-reveal="hidden"] {
+    opacity: 0;
+    transform: translateY(24px);
   }
 }

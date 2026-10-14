@@ -7,11 +7,16 @@ type RevealProps = {
   className?: string;
   /** Stagger direct children in, in seconds (e.g. 0.1). Omit to animate as one block. */
   stagger?: number;
+  /** Class applied to each wrapper when staggering. */
+  itemClassName?: string;
+  /** Delay before this block reveals, in seconds. */
+  delay?: number;
 };
 
-export default function Reveal({ children, className, stagger }: RevealProps) {
+// Transitions live in globals.css and only run under prefers-reduced-motion: no-preference.
+export default function Reveal({ children, className, stagger, itemClassName, delay = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [shown, setShown] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -20,25 +25,26 @@ export default function Reveal({ children, className, stagger }: RevealProps) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          setShown(true);
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  const style = (delay = 0): React.CSSProperties => ({
-    opacity: visible ? 1 : 0,
-    transform: visible ? "translateY(0)" : "translateY(20px)",
-    transition: `opacity 0.6s ease-out ${delay}s, transform 0.6s ease-out ${delay}s`,
-  });
+  const state = shown ? "shown" : "hidden";
 
   if (!stagger) {
     return (
-      <div ref={ref} className={className} style={style()}>
+      <div
+        ref={ref}
+        className={className}
+        data-reveal={state}
+        style={delay ? ({ "--delay": `${delay}s` } as React.CSSProperties) : undefined}
+      >
         {children}
       </div>
     );
@@ -47,7 +53,12 @@ export default function Reveal({ children, className, stagger }: RevealProps) {
   return (
     <div ref={ref} className={className}>
       {Children.toArray(children).map((child, i) => (
-        <div key={i} style={style(i * stagger)}>
+        <div
+          key={i}
+          className={itemClassName}
+          data-reveal={state}
+          style={{ "--delay": `${i * stagger}s` } as React.CSSProperties}
+        >
           {child}
         </div>
       ))}

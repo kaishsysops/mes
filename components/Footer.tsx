@@ -1,69 +1,69 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin } from "lucide-react";
 import { contact, services } from "@/lib/content";
+import { logoDarkFilter } from "@/lib/ui";
+
+const linkClass = "text-muted transition-colors hover:text-ink";
 
 export default function Footer() {
   return (
-    <footer className="bg-ink-deep text-cream">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <Image src="/images/logo.png" alt="MES" width={32} height={35} className="h-8 w-auto" />
-            <span className="font-serif text-2xl">MES</span>
+    <footer className="px-2 pb-2 sm:px-3 sm:pb-3">
+      <div className="rounded-2xl bg-surface">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-6 py-16 sm:grid-cols-2 lg:grid-cols-12 lg:px-10 lg:py-20">
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-2.5">
+              <Image src="/images/logo.png" alt="" width={30} height={33} className={`h-8 w-auto ${logoDarkFilter}`} />
+              <span className="text-lg font-semibold tracking-tight text-ink">MES</span>
+            </div>
+            <p className="mt-5 max-w-[36ch] text-sm leading-relaxed text-muted">
+              Maldives Employment Services. A recruiting agent and manpower supplier for skilled,
+              semi-skilled, and professional roles.
+            </p>
           </div>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-cream/60">
-            Maldives-based recruiting agent and manpower supplier for skilled,
-            semi-skilled, and professional roles.
+
+          <nav aria-label="Company" className="lg:col-span-2">
+            <p className="text-sm font-medium text-ink">Company</p>
+            <ul className="mt-4 space-y-3 text-sm">
+              <li><Link href="/about" className={linkClass}>About</Link></li>
+              <li><Link href="/services" className={linkClass}>Services</Link></li>
+              <li><Link href="/clients" className={linkClass}>Clients</Link></li>
+              <li><Link href="/contact" className={linkClass}>Contact</Link></li>
+            </ul>
+          </nav>
+
+          <nav aria-label="Services" className="lg:col-span-2">
+            <p className="text-sm font-medium text-ink">Services</p>
+            <ul className="mt-4 space-y-3 text-sm">
+              {services.map((service) => (
+                <li key={service.slug}>
+                  <Link href={`/services#${service.slug}`} className={linkClass}>
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="lg:col-span-3">
+            <p className="text-sm font-medium text-ink">Office</p>
+            <address className="mt-4 space-y-3 text-sm not-italic">
+              <p className="text-muted">{contact.address.join(", ")}</p>
+              <p>
+                <a href={`mailto:${contact.emails[0]}`} className={linkClass}>{contact.emails[0]}</a>
+              </p>
+              <p>
+                <a href={`tel:${contact.phones[0].replace(/[^+\d]/g, "")}`} className={linkClass}>
+                  {contact.phones[0]}
+                </a>
+              </p>
+            </address>
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+          <p className="border-t border-line py-6 text-xs text-muted">
+            &copy; {new Date().getFullYear()} Maldives Employment Services
           </p>
-        </div>
-
-        <div>
-          <p className="text-xs font-semibold tracking-wide uppercase text-accent">Company</p>
-          <ul className="mt-4 space-y-2 text-sm text-cream/70">
-            <li><Link href="/about" className="hover:text-cream">About</Link></li>
-            <li><Link href="/services" className="hover:text-cream">Services</Link></li>
-            <li><Link href="/clients" className="hover:text-cream">Clients</Link></li>
-            <li><Link href="/contact" className="hover:text-cream">Contact</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <p className="text-xs font-semibold tracking-wide uppercase text-accent">Services</p>
-          <ul className="mt-4 space-y-2 text-sm text-cream/70">
-            {services.map((service) => (
-              <li key={service.slug}>
-                <Link href={`/services#${service.slug}`} className="hover:text-cream">
-                  {service.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <p className="text-xs font-semibold tracking-wide uppercase text-accent">Contact</p>
-          <ul className="mt-4 space-y-3 text-sm text-cream/70">
-            <li className="flex items-start gap-2">
-              <Phone size={14} className="mt-0.5 text-accent" />
-              <span>{contact.phones.join(" / ")}</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Mail size={14} className="mt-0.5 text-accent" />
-              <a href={`mailto:${contact.emails[0]}`} className="hover:text-cream">{contact.emails[0]}</a>
-            </li>
-            <li className="flex items-start gap-2">
-              <MapPin size={14} className="mt-0.5 text-accent" />
-              <span>{contact.address.join(", ")}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="border-t border-cream/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-xs text-cream/50 sm:flex-row">
-          <p>&copy; {new Date().getFullYear()} Maldives Employment Services</p>
-          <p>Male, Maldives</p>
         </div>
       </div>
     </footer>

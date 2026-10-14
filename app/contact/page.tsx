@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Phone, PhoneCall, Mail, MapPin } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import IconBadge from "@/components/IconBadge";
+import PageHeader from "@/components/PageHeader";
 import ContactForm from "@/components/ContactForm";
 import { contact } from "@/lib/content";
 
@@ -10,46 +9,49 @@ export const metadata: Metadata = {
   description: "Contact the MES team in Male.",
 };
 
+const toTel = (n: string) => `tel:${n.replace(/[^+\d]/g, "")}`;
+
 const details = [
-  { icon: Phone, label: "Telephone", lines: contact.phones },
-  { icon: PhoneCall, label: "Hotline", lines: contact.hotlines },
-  { icon: Mail, label: "Email", lines: contact.emails },
-  { icon: MapPin, label: "Office", lines: contact.address },
+  { label: "Hotline", lines: contact.hotlines.map((n) => ({ text: n, href: toTel(n) })) },
+  { label: "Telephone", lines: contact.phones.map((n) => ({ text: n, href: toTel(n) })) },
+  { label: "Email", lines: contact.emails.map((e) => ({ text: e, href: `mailto:${e}` })) },
+  { label: "Office", lines: contact.address.map((line) => ({ text: line, href: undefined })) },
 ];
 
 export default function ContactPage() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
-      <Reveal className="max-w-2xl">
-        <p className="text-xs font-semibold tracking-wide uppercase text-accent-deep">Contact</p>
-        <h1 className="mt-4 font-serif text-4xl font-semibold leading-tight text-ink sm:text-5xl">
-          Start with the requirement in front of you.
-        </h1>
-        <p className="mt-6 text-lg leading-relaxed text-ink/70">
-          Recruiting, moving a workforce, sorting documents, or looking for HR
-          advice. Send the details and the team will pick it up.
-        </p>
-      </Reveal>
+    <>
+      <PageHeader
+        title="Tell us what you need to hire."
+        lead="Recruiting, moving a workforce, sorting documents, or looking for HR advice. Send the details and the team will pick it up."
+      />
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
-        <Reveal className="rounded-md border border-line bg-white/60 p-8">
+      <section className="mx-auto grid max-w-[1400px] gap-12 px-4 pb-24 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-10 lg:pb-32">
+        <Reveal className="rounded-2xl bg-surface p-6 sm:p-10 lg:col-span-7">
           <ContactForm />
         </Reveal>
 
-        <Reveal stagger={0.08} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-          {details.map((detail) => (
-            <div key={detail.label} className="flex h-full gap-4 rounded-md border border-line p-5">
-              <IconBadge icon={detail.icon} size="sm" />
-              <div>
-                <p className="text-xs font-semibold tracking-wide uppercase text-ink/50">{detail.label}</p>
-                {detail.lines.map((line) => (
-                  <p key={line} className="mt-1 text-sm text-ink/85">{line}</p>
-                ))}
+        <Reveal delay={0.08} className="lg:col-span-5">
+          <dl className="grid gap-10 sm:grid-cols-2">
+            {details.map((detail) => (
+              <div key={detail.label} className="border-t border-line pt-5">
+                <dt className="text-sm text-muted">{detail.label}</dt>
+                <dd className="mt-3 space-y-1">
+                  {detail.lines.map((line) =>
+                    line.href ? (
+                      <a key={line.text} href={line.href} className="block text-ink transition-colors hover:text-accent-ink">
+                        {line.text}
+                      </a>
+                    ) : (
+                      <p key={line.text} className="text-ink">{line.text}</p>
+                    )
+                  )}
+                </dd>
               </div>
-            </div>
-          ))}
+            ))}
+          </dl>
         </Reveal>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

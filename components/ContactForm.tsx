@@ -3,17 +3,18 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { contact, services } from "@/lib/content";
+import { arrowNudge, buttonPrimary } from "@/lib/ui";
 
 const fields = [
-  { name: "name", label: "Name", type: "text" },
-  { name: "email", label: "Email", type: "email" },
-  { name: "mobile", label: "Mobile number", type: "tel" },
-  { name: "company", label: "Company", type: "text" },
+  { name: "name", label: "Name", type: "text", autoComplete: "name" },
+  { name: "email", label: "Email", type: "email", autoComplete: "email" },
+  { name: "mobile", label: "Mobile number", type: "tel", autoComplete: "tel" },
+  { name: "company", label: "Company", type: "text", autoComplete: "organization" },
 ] as const;
 
 const inputClass =
-  "mt-2 w-full border-b border-line bg-transparent py-2 text-ink outline-none transition-colors focus:border-accent";
-const labelClass = "text-xs font-semibold tracking-wide uppercase text-ink/50";
+  "w-full rounded-xl border border-line bg-paper px-4 py-3 text-ink transition-[border-color,box-shadow] duration-200 outline-none focus:border-accent focus:ring-4 focus:ring-accent/15 user-invalid:border-danger";
+const labelClass = "text-sm font-medium text-ink";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -36,15 +37,20 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex items-start gap-3">
-        <Check size={18} className="mt-1 shrink-0 text-accent" />
+      <div role="status" className="flex flex-col items-start gap-5 py-6">
+        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-on-accent">
+          <Check size={20} strokeWidth={1.5} />
+        </span>
         <div>
-          <p className="font-serif text-xl font-semibold text-ink">Check your email app</p>
-          <p className="mt-1 text-sm text-ink/60">
-            A message to {contact.emails[0]} should be open and ready to send. If nothing
-            opened, email us directly at that address.
+          <p className="text-2xl font-semibold tracking-tight text-ink">Check your email app</p>
+          <p className="mt-2 max-w-[48ch] leading-relaxed text-muted">
+            A message to {contact.emails[0]} should be open and ready to send. If nothing opened, email
+            us directly at that address.
           </p>
         </div>
+        <button type="button" onClick={() => setSubmitted(false)} className="text-sm font-medium text-accent-ink">
+          Edit the enquiry
+        </button>
       </div>
     );
   }
@@ -52,13 +58,20 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="grid gap-6 sm:grid-cols-2">
       {fields.map((field) => (
-        <div key={field.name}>
+        <div key={field.name} className="flex flex-col gap-2">
           <label htmlFor={field.name} className={labelClass}>{field.label}</label>
-          <input id={field.name} name={field.name} type={field.type} required className={inputClass} />
+          <input
+            id={field.name}
+            name={field.name}
+            type={field.type}
+            autoComplete={field.autoComplete}
+            required
+            className={inputClass}
+          />
         </div>
       ))}
 
-      <div className="sm:col-span-2">
+      <div className="flex flex-col gap-2 sm:col-span-2">
         <label htmlFor="service" className={labelClass}>Service required</label>
         <select id="service" name="service" className={inputClass} defaultValue="General enquiry">
           <option>General enquiry</option>
@@ -68,17 +81,25 @@ export default function ContactForm() {
         </select>
       </div>
 
-      <div className="sm:col-span-2">
+      <div className="flex flex-col gap-2 sm:col-span-2">
         <label htmlFor="message" className={labelClass}>Workforce requirement</label>
-        <textarea id="message" name="message" rows={4} required className={`${inputClass} resize-none`} />
+        <textarea
+          id="message"
+          name="message"
+          rows={5}
+          required
+          aria-describedby="message-hint"
+          className={`${inputClass} resize-none`}
+        />
+        <p id="message-hint" className="text-sm text-muted">
+          Roles, number of people, skill level, and when you need them.
+        </p>
       </div>
 
       <div className="sm:col-span-2">
-        <button
-          type="submit"
-          className="inline-flex items-center gap-2 rounded-sm bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-deep"
-        >
-          Send enquiry <ArrowRight size={16} />
+        <button type="submit" className={buttonPrimary}>
+          Send enquiry
+          <ArrowRight size={16} strokeWidth={1.5} className={arrowNudge} />
         </button>
       </div>
     </form>

@@ -3,14 +3,14 @@ import {
   Truck,
   FileText,
   Briefcase,
-  CalendarClock,
-  Building2,
-  Layers,
   ClipboardList,
   Route,
   BadgeCheck,
   type LucideIcon,
 } from "lucide-react";
+
+/** The single label for every "contact us" call to action on the site. */
+export const ctaLabel = "Discuss a requirement";
 
 export const contact = {
   phones: ["(+960) 400 8080", "(+960) 331 0404"],
@@ -37,8 +37,8 @@ export const services: Service[] = [
     summary: "Skilled, semi-skilled, and professional recruitment for the roles you need filled.",
     detail:
       "We recruit and supply skilled, semi-skilled, and professional workers for employers in the Maldives, and help local Maldivians find suitable jobs. You tell us the role; we coordinate candidates through to selection.",
-    image: "/images/service-sourcing.jpg",
-    imageAlt: "Employer and candidate shaking hands after an interview",
+    image: "/images/elite-hero-ready.jpg",
+    imageAlt: "MES recruiter walking two candidates through their placement paperwork",
   },
   {
     slug: "logistics",
@@ -109,11 +109,10 @@ export const clientNames = [
   "Sinohydro Corporation",
 ];
 
-export const stats: { value: string; label: string; icon: LucideIcon }[] = [
-  { value: "20+", label: "Years of experience", icon: CalendarClock },
-  { value: `${clientNames.length}`, label: "Named clients", icon: Building2 },
-  { value: `${sectors.length}`, label: "Sectors served", icon: Layers },
-  { value: `${services.length}`, label: "Service lines", icon: Briefcase },
+export const stats: { value: string; label: string }[] = [
+  { value: "20+", label: "Years working with businesses of all sizes" },
+  { value: `${clientNames.length}`, label: "Organisations that have hired through MES" },
+  { value: `${sectors.length}`, label: "Sectors, from hospitality to infrastructure" },
 ];
 
 export const checklistItems = [
@@ -123,21 +122,18 @@ export const checklistItems = [
   "One team and one point of contact for the whole process",
 ];
 
-export const processSteps: { step: string; title: string; description: string; icon: LucideIcon }[] = [
+export const processSteps: { title: string; description: string; icon: LucideIcon }[] = [
   {
-    step: "01",
     icon: ClipboardList,
     title: "Understand the requirement",
     description: "The role, the number of people, the skill level, and when you need them.",
   },
   {
-    step: "02",
     icon: Route,
     title: "Coordinate the route",
     description: "Candidate selection, visas, work permits, and travel, run by one team.",
   },
   {
-    step: "03",
     icon: BadgeCheck,
     title: "Support readiness",
     description: "Arrival and on-the-ground coordination until the worker starts.",
